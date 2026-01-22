@@ -5,11 +5,6 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] float speed = 4.0f;
     [SerializeField] float attack;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         // 위쪽 방향으로 발사

@@ -3,8 +3,11 @@
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform pos;
 
     Animator animator;
+
 
     // SetBool("isLeft") 방식은 해시 변환 작업이 숨어있기 때문에 미리 변환시켜서 최적화
     static readonly int LeftHash = Animator.StringToHash("isLeft");
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Move(input);
         UpdateAnimator(input);
+        Shoot();
     }
 
     // 이동 함수
@@ -29,6 +33,18 @@ public class Player : MonoBehaviour
         Vector3 delta = new Vector3(input.x, input.y, 0f) * (moveSpeed * Time.deltaTime);
         transform.Translate(delta);
         MoveInCamera();
+    }
+
+    // 카메라 밖으로 이동 못하게 만드는 함수
+    private void MoveInCamera()
+    {
+        // 월드 좌표 Viewport 좌표로 변환
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        viewPos.x = Mathf.Clamp01(viewPos.x);
+        viewPos.y = Mathf.Clamp01(viewPos.y);
+
+        Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos);
+        transform.position = worldPos;
     }
 
     // 애니메이션 변경 함수
@@ -50,15 +66,10 @@ public class Player : MonoBehaviour
             animator.SetBool(hash, value);
     }
 
-    // 카메라 밖으로 이동 못하게 만드는 함수
-    private void MoveInCamera()
+    // 미사일 발사 함수
+    private void Shoot()
     {
-        // 월드 좌표 Viewport 좌표로 변환
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        viewPos.x = Mathf.Clamp01(viewPos.x);
-        viewPos.y = Mathf.Clamp01(viewPos.y);
-
-        Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos);
-        transform.position = worldPos;
+        // Quaternion.identity = 회전 없음
+        if (Input.GetKeyDown(KeyCode.Space)) Instantiate(bullet, pos.position, Quaternion.identity);
     }
 }
