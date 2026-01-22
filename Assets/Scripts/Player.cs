@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     {
         Vector3 delta = new Vector3(input.x, input.y, 0f) * (moveSpeed * Time.deltaTime);
         transform.Translate(delta);
+        MoveInCamera();
     }
 
     // 애니메이션 변경 함수
@@ -47,5 +48,17 @@ public class Player : MonoBehaviour
     {
         if (animator.GetBool(hash) != value)
             animator.SetBool(hash, value);
+    }
+
+    // 카메라 밖으로 이동 못하게 만드는 함수
+    private void MoveInCamera()
+    {
+        // 월드 좌표 Viewport 좌표로 변환
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        viewPos.x = Mathf.Clamp01(viewPos.x);
+        viewPos.y = Mathf.Clamp01(viewPos.y);
+
+        Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos);
+        transform.position = worldPos;
     }
 }
