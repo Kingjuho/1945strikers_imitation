@@ -2,18 +2,50 @@
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
 
-    void Start()
+    Animator animator;
+
+    // SetBool("isLeft") 방식은 해시 변환 작업이 숨어있기 때문에 미리 변환시켜서 최적화
+    static readonly int LeftHash = Animator.StringToHash("isLeft");
+    static readonly int RightHash = Animator.StringToHash("isRight");
+    static readonly int UpHash = Animator.StringToHash("isUp");
+
+    void Awake()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        // 방향 * 시간 * 스피드
-        float distanceX = Input.GetAxisRaw("Horizontal") * Time.deltaTime * moveSpeed;
-        float distanceY = Input.GetAxisRaw("Vertical") * Time.deltaTime * moveSpeed;
-        transform.Translate(distanceX, distanceY, 0);
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Move(input);
+        UpdateAnimator(input);
+    }
+
+    // 이동 함수
+    private void Move(Vector2 input)
+    {
+        Vector3 delta = new Vector3(input.x, input.y, 0f) * (moveSpeed * Time.deltaTime);
+        transform.Translate(delta);
+    }
+
+    // 애니메이션 변경 함수
+    private void UpdateAnimator(Vector2 input)
+    {
+        bool left = input.x <= -0.5f;
+        bool right = input.x >= 0.5f;
+        bool up = input.y >= 0.5f;
+
+        SetBoolIfChanged(LeftHash, left);
+        SetBoolIfChanged(RightHash, right);
+        SetBoolIfChanged(UpHash, up);
+    }
+
+    // 조건이 거짓(상태 변경)이면 SetBool
+    private void SetBoolIfChanged(int hash, bool value)
+    {
+        if (animator.GetBool(hash) != value)
+            animator.SetBool(hash, value);
     }
 }
