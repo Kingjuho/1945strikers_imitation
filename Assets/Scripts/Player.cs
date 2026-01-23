@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform pos;
 
     Animator animator;
+
+    int power = 0;
 
 
     // SetBool("isLeft") 방식은 해시 변환 작업이 숨어있기 때문에 미리 변환시켜서 최적화
@@ -71,5 +74,21 @@ public class Player : MonoBehaviour
     {
         // Quaternion.identity = 회전 없음
         if (Input.GetKeyDown(KeyCode.Space)) Instantiate(bullet, pos.position, Quaternion.identity);
+    }
+
+    // 사망 처리 함수
+    public void Dead()
+    {
+        Destroy(gameObject);
+    }
+
+    // isTrigger 충돌 감지 함수
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            power = Mathf.Clamp(power + 1, 0, 3);
+            Destroy(collision.gameObject);
+        }
     }
 }

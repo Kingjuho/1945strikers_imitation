@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     [SerializeField] Transform pos2;
 
     public GameObject bullet;
+    [SerializeField] GameObject item;
 
     void Start()
     {
@@ -37,7 +38,12 @@ public class Monster : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        if (hp <= 0) Dead();
+        if (hp <= 0)
+        {
+            // 아이템 드롭
+            Instantiate(item, transform.position, Quaternion.identity);
+            Dead();
+        }
     }
 
     // 사망 처리 함수

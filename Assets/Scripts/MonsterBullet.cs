@@ -27,7 +27,7 @@ public class MonsterBullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-
+            if (collision.gameObject.TryGetComponent<Player>(out Player target)) target.Dead();
         }
 
         Destroy(gameObject);
