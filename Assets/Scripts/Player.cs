@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject[] bullet;
     [SerializeField] private Transform pos;
 
     Animator animator;
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         // Quaternion.identity = 회전 없음
-        if (Input.GetKeyDown(KeyCode.Space)) Instantiate(bullet, pos.position, Quaternion.identity);
+        if (Input.GetKeyDown(KeyCode.Space)) Instantiate(bullet[power], pos.position, Quaternion.identity);
     }
 
     // 사망 처리 함수

@@ -557,7 +557,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 5
-  bullet: {fileID: 3697909104514900183, guid: 7846a50e465ada04fb48f2ae2dd39905, type: 3}
+  bullet:
+  - {fileID: 3697909104514900183, guid: 7846a50e465ada04fb48f2ae2dd39905, type: 3}
+  - {fileID: 2043962084361946871, guid: b8835f5ff7c80b24c9cc92d46498d423, type: 3}
+  - {fileID: 7809812284045717375, guid: 2a3d4c1c2f2fa0446890e710a04ca0ec, type: 3}
+  - {fileID: 6552121326460990282, guid: f307ea2962295e7479e8cc20e7fa2a84, type: 3}
   pos: {fileID: 1374250387}
 --- !u!61 &417323250
 BoxCollider2D:
