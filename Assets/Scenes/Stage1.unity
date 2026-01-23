@@ -563,6 +563,7 @@ MonoBehaviour:
   - {fileID: 7809812284045717375, guid: 2a3d4c1c2f2fa0446890e710a04ca0ec, type: 3}
   - {fileID: 6552121326460990282, guid: f307ea2962295e7479e8cc20e7fa2a84, type: 3}
   pos: {fileID: 1374250387}
+  powerUp: {fileID: 7013954252572118105, guid: 835bc948a5921f2448cabb3ba9f2a4df, type: 3}
 --- !u!61 &417323250
 BoxCollider2D:
   m_ObjectHideFlags: 0

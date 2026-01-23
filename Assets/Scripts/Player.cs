@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Animator animator;
 
     int power = 0;
+    [SerializeField] private GameObject powerUp;
 
 
     // SetBool("isLeft") 방식은 해시 변환 작업이 숨어있기 때문에 미리 변환시켜서 최적화
@@ -89,6 +90,10 @@ public class Player : MonoBehaviour
         {
             power = Mathf.Clamp(power + 1, 0, 3);
             Destroy(collision.gameObject);
+
+            // 파워업 이펙트 재생
+            GameObject go = Instantiate(powerUp, new Vector3(0, 0, -1), Quaternion.identity);
+            Destroy(go, 1);
         }
     }
 }
