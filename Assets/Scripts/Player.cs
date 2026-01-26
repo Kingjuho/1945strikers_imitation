@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameObject[] bullet;
+    [SerializeField] private GameObject bomb;
     [SerializeField] private Transform pos;
 
     Animator animator;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         Move(input);
         UpdateAnimator(input);
         Shoot();
+        Bomb();
     }
 
     // 이동 함수
@@ -75,6 +77,12 @@ public class Player : MonoBehaviour
     {
         // Quaternion.identity = 회전 없음
         if (Input.GetKeyDown(KeyCode.Space)) Instantiate(bullet[power], pos.position, Quaternion.identity);
+    }
+
+    // 폭탄 발사 함수
+    private void Bomb()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl)) Instantiate(bomb, Vector3.zero, Quaternion.identity);
     }
 
     // 사망 처리 함수
