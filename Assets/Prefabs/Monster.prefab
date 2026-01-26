@@ -188,7 +188,7 @@ MonoBehaviour:
   pos2: {fileID: 2851076821331073014}
   bullet: {fileID: 6272233601426842330, guid: a14fb2fbd696ab948a26322232302464, type: 3}
   item: {fileID: 6608508996693318585, guid: 65461a37370440b4da2e5edc3fe4ecab, type: 3}
-  deadEffect: {fileID: 0}
+  deadEffect: {fileID: 4003786307712211212, guid: ac13c95e52571874d9bffb2cb2dfec09, type: 3}
 --- !u!1 &2192854950585938403
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,6 +59,6 @@ public class Monster : MonoBehaviour
     void DeadEffect()
     {
         GameObject go = Instantiate(deadEffect, transform.position, Quaternion.identity);
-        Destroy(go, 1);
+        Destroy(go, 0.5f);
     }
 }
