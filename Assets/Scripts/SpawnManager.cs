@@ -16,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine("RandomSpawn");
-        Invoke("Stop", stopSpawn);
+        Invoke("StopSpawn", stopSpawn);
     }
 
     void Update()

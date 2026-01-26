@@ -88,12 +88,15 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Item"))
         {
-            power = Mathf.Clamp(power + 1, 0, 3);
-            Destroy(collision.gameObject);
-
             // 파워업 이펙트 재생
-            GameObject go = Instantiate(powerUp, new Vector3(0, 0, -1), Quaternion.identity);
-            Destroy(go, 1);
+            if (power < 3)
+            {
+                power = Mathf.Clamp(power + 1, 0, 3);
+                GameObject go = Instantiate(powerUp, new Vector3(0, 0, -1), Quaternion.identity);
+                Destroy(go, 1);
+            }
+
+            Destroy(collision.gameObject);
         }
     }
 }
