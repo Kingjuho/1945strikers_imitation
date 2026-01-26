@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74179eb975e1ef3439c8bd20c16336d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBomb
-  explosionRadius: 1.5
+  explosionRadius: 3.5
   damage: 50
   hitLayers:
     serializedVersion: 2
