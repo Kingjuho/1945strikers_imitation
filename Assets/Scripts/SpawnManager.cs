@@ -11,12 +11,14 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject monster1;
     [SerializeField] GameObject monster2;
 
+    [SerializeField] GameObject text_BossWarning;
+
     bool _swi = true;
 
     void Start()
     {
-        StartCoroutine("RandomSpawn");
-        Invoke("StopSpawn", stopSpawn);
+        StartCoroutine("SpawnRandom");
+        Invoke("SpawnStop", stopSpawn);
     }
 
     void Update()
@@ -25,7 +27,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     // 랜덤 스폰 코루틴
-    IEnumerator RandomSpawn()
+    IEnumerator SpawnRandom()
     {
         while(_swi)
         {
@@ -43,9 +45,18 @@ public class SpawnManager : MonoBehaviour
     }
 
     // 스폰 중지
-    void StopSpawn()
+    void SpawnStop()
     {
         _swi = false;
-        StopCoroutine("RandomSpawn");
+        StopCoroutine("SpawnRandom");
+
+        SpawnBoss();
     }
+
+    // 보스
+    void SpawnBoss()
+    {
+        text_BossWarning.SetActive(true);
+        CameraImpulse.Instance.Shake(1.0f);
+    }    
 }
