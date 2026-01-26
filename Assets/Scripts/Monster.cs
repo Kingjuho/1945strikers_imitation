@@ -8,8 +8,10 @@ public class Monster : MonoBehaviour
     [SerializeField] Transform pos1;
     [SerializeField] Transform pos2;
 
-    public GameObject bullet;
+    [SerializeField] GameObject bullet;
     [SerializeField] GameObject item;
+    [SerializeField] GameObject deadEffect;
+
 
     void Start()
     {
@@ -49,6 +51,14 @@ public class Monster : MonoBehaviour
     // 사망 처리 함수
     void Dead()
     {
+        DeadEffect();
         Destroy(gameObject);
+    }
+
+    // 사망 이펙트
+    void DeadEffect()
+    {
+        GameObject go = Instantiate(deadEffect, transform.position, Quaternion.identity);
+        Destroy(go, 1);
     }
 }
