@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   mb: {fileID: 6272233601426842330, guid: a14fb2fbd696ab948a26322232302464, type: 3}
-  mb2: {fileID: 0}
+  mb2: {fileID: 4256220732845346896, guid: 8d43dd1333f4e3d46addafb514639c7d, type: 3}
   pos1: {fileID: 1425192020}
   pos2: {fileID: 1650425991}
 --- !u!1 &229567928

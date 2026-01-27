@@ -22,7 +22,7 @@ public class Boss : MonoBehaviour
         StartCoroutine("BossMissile");
     }
 
-    void Hide() { GameObject.Find("TextBossWarning").SetActive(false); }
+    void Hide() { GameObject.Find("Text_BossWarning").SetActive(false); }
 
     IEnumerator BossMissile()
     {
