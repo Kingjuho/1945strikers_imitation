@@ -2,34 +2,39 @@
 
 public class MonsterBullet2 : MonoBehaviour
 {
-    [SerializeField] float speed = 3.0f;
-    [SerializeField] float attack;
+    //총알 속도
+    public float Speed = 3f;
+    //이동방향
+    Vector2 vec2 = Vector2.down;
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        // 아래쪽 방향으로 발사
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        //총알 이동
+        transform.Translate(vec2 * Speed * Time.deltaTime);
     }
 
-    // 카메라 밖으로 나갈 경우 삭제
+
+    public void Move(Vector2 vec)
+    {
+        //이동방향 설정
+        vec2 = vec;
+    }
+
+
     private void OnBecameInvisible()
     {
+        //화면밖으로 나가면 오브젝트 제거
         Destroy(gameObject);
+
     }
 
-    // isTrigger가 체크된 객체와 충돌 시 호출되는 함수
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.TryGetComponent<Player>(out Player target)) target.Dead();
+            //플레이어 맞으면 오브젝트 제거
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
     }
 }

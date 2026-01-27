@@ -20,7 +20,7 @@ public class CameraImpulse : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Shake(float force)
+    public void CameraShakeShow(float force = 1.0f)
     {
         impulseSource.GenerateImpulse(force);
     }

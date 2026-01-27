@@ -57,6 +57,20 @@ public class SpawnManager : MonoBehaviour
     void SpawnBoss()
     {
         text_BossWarning.SetActive(true);
-        CameraImpulse.Instance.Shake(1.0f);
-    }    
+        StartCoroutine("Shake");
+
+        Vector3 pos = new Vector3(0, 3f, 0);
+        Instantiate(monster2, pos, Quaternion.identity);
+    }
+
+    IEnumerator Shake()
+    {
+        int shakeCnt = 30;
+        while (shakeCnt > 0)
+        {
+            CameraImpulse.Instance.CameraShakeShow();
+            yield return new WaitForSeconds(0.1f);
+            shakeCnt--;
+        }
+    }
 }
