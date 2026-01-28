@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     int power = 0;
     [SerializeField] private GameObject powerUp;
 
+    public DynamicJoystick joyStick;
 
     // SetBool("isLeft") 방식은 해시 변환 작업이 숨어있기 때문에 미리 변환시켜서 최적화
     static readonly int LeftHash = Animator.StringToHash("isLeft");
@@ -26,7 +27,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        // Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 input = new Vector2(joyStick.Horizontal, joyStick.Vertical);
         Move(input);
         UpdateAnimator(input);
         Shoot();
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     // 이동 함수
     private void Move(Vector2 input)
     {
-        Vector3 delta = new Vector3(input.x, input.y, 0f) * (moveSpeed * Time.deltaTime);
+        Vector3 delta = new Vector3(input.x, input.y, 0f) * (moveSpeed * Time.unscaledDeltaTime);
         transform.Translate(delta);
         MoveInCamera();
     }
