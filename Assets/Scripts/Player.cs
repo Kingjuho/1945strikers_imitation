@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameObject[] bullet;
     [SerializeField] private GameObject bomb;
-    [SerializeField] private Transform pos;
+    [SerializeField] public Transform pos;
 
     Animator animator;
 
